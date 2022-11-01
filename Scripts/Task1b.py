@@ -1,18 +1,22 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Nov  1 13:48:42 2022
+Created on Tue Nov  1 14:30:16 2022
 
 @author: gab44
 """
-
 
 # Description: Buffers streams within 1000 km
    
 # Imports system modules
 import arcpy
    
+# Sets the ArcPy workspace environment to Data folder in ENV859_PS4 folder
+arcpy.env.workspace = "V:\ENV859_PS4\Data"
+# Allows script outputs to be overwritten
+arcpy.env.overwriteOutput = True
+   
 # Sets local variables
-in_features = "V:\ENV859_PS4\Data\streams.shp"
+in_features = "streams.shp"
 out_feature_class = "V:\ENV859_PS4\Scratch\StrmBuff1km.shp"
 # Sets buffer distance
 buffDist = "1000 kilometers"
