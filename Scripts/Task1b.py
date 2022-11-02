@@ -1,11 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Nov  1 14:30:16 2022
-
-@author: gab44
-"""
-
-# Description: Buffers streams within 1000 km
+# Task 1b - Setting environment values in the script
+# Gabi Ballardo
+# ENV 859 Fall 2022
    
 # Imports system modules
 import arcpy
@@ -16,12 +11,16 @@ arcpy.env.workspace = "V:\ENV859_PS4\Data"
 arcpy.env.overwriteOutput = True
    
 # Sets local variables
+
+# Creates string variable that includes just the file name streams.shp
 in_features = "streams.shp"
+# Creates string variable that sets path and filename of buffer output (hard-coded)
 out_feature_class = "V:\ENV859_PS4\Scratch\StrmBuff1km.shp"
 # Sets buffer distance
 buffDist = "1000 kilometers"
 
-# Uses buffer tool
+# Buffers streams.shp 1000 meters
 arcpy.Buffer_analysis(in_features,out_feature_class,buffDist,'','','ALL')
 
+# Displays messages, warnings, or errors to console
 print(arcpy.GetMessages())

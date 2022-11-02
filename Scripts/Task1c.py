@@ -1,11 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Nov  1 14:48:17 2022
-
-@author: gab44
-"""
-
-# Description: Buffers streams within 1000 km
+# Task 1c - Enabling user input
+# Gabi Ballardo
+# ENV 859 Fall 2022
    
 # Imports system modules
 import sys,arcpy
@@ -16,13 +11,16 @@ arcpy.env.workspace = "V:\ENV859_PS4\Data"
 arcpy.env.overwriteOutput = True
    
 # Sets local variables
+
+# Creates string variable that includes just the file name streams.shp
 in_features = "streams.shp"
-# Allows for user to input
+# Allows for user to specify the output name
 out_feature_class = sys.argv[1]
 # Allows user to set buffer distance
 buffDist = sys.argv[2]
 
-# Uses buffer tool
+# Buffers streams.shp with user inputs
 arcpy.Buffer_analysis(in_features,out_feature_class,buffDist,'','','ALL')
 
+# Displays messages, warnings, or errors to console
 print(arcpy.GetMessages())
