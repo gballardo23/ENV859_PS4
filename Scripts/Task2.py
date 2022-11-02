@@ -10,28 +10,25 @@ arcpy.env.overwriteOutput = True
    
 # Sets local variables
 
-# Creates a string variable containing the path to the Roads.shp feature class
-in_features = "V:\ENV859_PS4\Data\Roads.shp"
 # Creates a multi-value string variable of road type class values
 road_type_class = "0;201;203"
 # Creates a list variable by splitting the values
 road_class_list = road_type_class.split(";")
 
-# Creates string variable that sets path of the select output (hard-coded)
-output_path = "V:\ENV859_PS4\Scratch\\roads_"
-
-# Create a cursor (this is like opening a file)
-rows = arcpy.da.SearchCursor(in_features,'ROAD_TYPE')
-
 # Iterates through each of the road class types in the list
-for row in rows:
-    road_type = row[0]
-    out_feature_class = output_path +str(road_type) +".shp"
-    print(out_feature_class)
-    # Selects 
-    arcpy.Select_analysis(in_features,output_path,road_type)
-    # Creates three distinct shapefile outputs
+for road_type in road_class_list:
+    
+    #Assigns variables
+    
+    # Creates a string variable containing the path to the Roads.shp feature class
+    in_features = "V:\ENV859_PS4\Data\Roads.shp"
+    
+    out_feature_class = f"V:\ENV859_PS4\Scratch\\roads_{road_type}.shp"
+    
+    where_clause = f'ROAD_TYPE={road_type}'
+    
+    # Selects for road types in the list
+    arcpy.Select_analysis(in_features,out_feature_class,where_clause)
  
-   
     # Displays messages, warnings, or errors to console
     print(arcpy.GetMessages())
