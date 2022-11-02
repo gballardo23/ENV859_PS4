@@ -1,4 +1,4 @@
-# Task 1c - Enabling user input
+# Task 1d - Adding auto-generated output names
 # Gabi Ballardo
 # ENV 859 Fall 2022
    
@@ -14,10 +14,12 @@ arcpy.env.overwriteOutput = True
 
 # Creates string variable that includes just the file name streams.shp
 in_features = "streams.shp"
-# Allows for user to specify the output name
-out_feature_class = sys.argv[1]
-# Allows user to set buffer distance in meters
-buffDist = f"{sys.argv[2]} meters"
+# Creates string variable that sets path and filename of buffer output (hard-coded)
+
+arcpy.management.CreateFeatureClass(outPath,outName)
+
+# Allows user to set buffer distance
+buffDist = sys.argv[2]
 
 # Buffers streams.shp with user inputs
 arcpy.Buffer_analysis(in_features,out_feature_class,buffDist,'','','ALL')
