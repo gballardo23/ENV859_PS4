@@ -14,12 +14,11 @@ arcpy.env.overwriteOutput = True
 
 # Creates string variable that includes just the file name streams.shp
 in_features = "streams.shp"
-# Creates string variable that sets path and filename of buffer output (hard-coded)
+# Allows user to set buffer distance 
+buffDist = f"{sys.argv[1]}"
+# Allows for user to specify the output name
+out_feature_class = f"V:\ENV859_PS4\Scratch\\buff_{buffDist}m.shp"
 
-arcpy.management.CreateFeatureClass(outPath,outName)
-
-# Allows user to set buffer distance
-buffDist = sys.argv[2]
 
 # Buffers streams.shp with user inputs
 arcpy.Buffer_analysis(in_features,out_feature_class,buffDist,'','','ALL')
