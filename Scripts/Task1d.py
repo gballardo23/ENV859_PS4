@@ -16,7 +16,7 @@ arcpy.env.overwriteOutput = True
 in_features = "streams.shp"
 # Allows user to set buffer distance 
 buffDist = f"{sys.argv[1]}"
-# Allows for user to specify the output name
+# Auto-generates the output name based on the set buffer distance
 out_feature_class = f"V:\ENV859_PS4\Scratch\\buff_{buffDist}m.shp"
 
 
