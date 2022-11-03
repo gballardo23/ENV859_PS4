@@ -5,16 +5,15 @@
 # Imports system modules
 import sys,os,arcpy
 
+# Sets the environment workspace
 arcpy.env.workspace = "V:\ENV859_PS4\Data"
 
 # Allow arcpy to overwrite output
 arcpy.env.overwriteOutput = True
 
-# Set local variables
-
-# Ensures the ArcPy product edition used is “ArcInfo “
+# Ensures the ArcPy product edition used is “ArcInfo"
 if arcpy.CheckProduct("ArcInfo") == "Available":
-    arcpy.PolygonToLine_management("Counties", "CountyLines")
+    ArcInfo = True
 else:
     msg = 'ArcGIS for Desktop Advanced license not available'
     print(msg)
@@ -23,16 +22,20 @@ else:
 # Uses the ListFeatureClasses function to return a list of BMR shapefiles.
 featureclasses = arcpy.ListFeatureClasses("BMR*")
 
-# Copy shapefiles to a file geodatabase
-for fc in featureclasses:
-    arcpy.CopyFeatures_management(
-        fc, os.path.join("V:\ENV859_PS4\scratch.gdb",
-                         os.path.splitext(fc)[0]))
-    
-# Split  features in current BMR feature class by county features in TriCounties feature
-BMR = "Habitat_Analysis.gdb/vegtype"
-splitFeatures = "TriCounties.shp"
-splitField = "CO_NAME"
-outWorkspace = "C:/output/Output.gdb"
+# Creates BMR list of folder names
+BMR_folder_list = ["BMR_exc","BMR_fair","BMR_good","BMR_gf"]
 
-arcpy.analysis.Split(BMR, splitFeatures, splitField, outWorkspace)
+# Creates new folder for each BMR shapefile
+for folder in BMR_folder_list:
+    arcpy.CreateFolder_management("V:\ENV859_PS4\Scratch",folder)
+
+# Splits feature class by counties and moves them to their associated new folders
+for fc in featureclasses:
+    arcpy.analysis.Split(fc, "TriCounties.shp","CO_NAME",folder)
+
+
+
+
+
+
+
