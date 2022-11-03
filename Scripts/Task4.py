@@ -14,8 +14,13 @@ dsc = arcpy.da.Describe(Dataset)
 # Indicates the dataset’s catalogPath property
 print(dsc['catalogPath'])
 
-#Message results back to the status window when run
-if dsc == "FeatureSet":
+# Reports XMin, YMin, XMax, and YMax properties of the dataset’s extent object
+
+# Checks the dataset's datasetType
+print(dsc['datasetType'])
+
+# Generates warning and error messages based on the dataset
+if dsc['datasetType'] == "FeatureSet":
     print(arcpy.AddWarning("The shape type is {}.".format(Dataset)))
 elif dsc == "RasterDataset":
     print(arcpy.AddWarning("The format is {}.".format(Dataset)))
